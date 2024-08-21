@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 app.post('/api/chat', (req, res) => {
     const { message } = req.body;
     if(!message) res.status(400).send('Message is required');
-    res.send(message);
+    res.send({response:message});
 })
 
 app.listen(3000, () => console.log('Server started on port:', port));
