@@ -6,10 +6,11 @@ configDotenv();
 const app = express();
 const port =  process.env.PORT ||3000;
 
-// console.log(process.env.FRONTEND_URI);
-// app.use(cors({
-//     origin:['http://localhost:5173', process.env.FRONTEND_URI],
-// }));
+//this code is keep the server active as it gets down after few minutes of inactivity
+setTimeout(() => {
+   console.log("Hail! I am still here!"); 
+}, 300000);
+
 app.use(cors());
 app.use(express.json());
 
