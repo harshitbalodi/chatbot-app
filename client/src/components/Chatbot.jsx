@@ -11,7 +11,6 @@ const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [userGender, setUserGender] = useState(null);
-  const chatWindowRef = useRef(null);
   const lastMessageRef = useRef(null);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatHistory]);
+  }, [chatHistory, showChatWindow]);
 
   const scrollToBottom = () => {
     if (lastMessageRef.current) {
@@ -48,7 +47,7 @@ const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
       setChatHistory((prev) => [...prev, newUserMessage]);
 
       try {
-        const res = await axios.post('http://localhost:3000/api/chat', { message });
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/chat`, { message });
         const newBotMessage = { role: 'assistant', message: res.data.response };
         setChatHistory((prev) => [...prev, newBotMessage]);
         playNotificationSound();
@@ -93,7 +92,6 @@ const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.3 }}
-            ref={chatWindowRef}
           >
             <div className="chat-messages">
               {chatHistory.map((message, index) => (

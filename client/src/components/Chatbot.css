@@ -33,7 +33,7 @@
   padding: 1rem;
   border-radius: 0.75rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 320px;
+  max-width: 320px;
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -76,7 +76,6 @@
 
 .chat-bubble {
   display: flex;
-  align-items: center;
   margin-bottom: 0.5rem;
   max-width: 80%;
   padding: 0.75rem;
@@ -87,6 +86,7 @@
   align-self: flex-end;
   justify-content: flex-end;
   border-radius: 1rem 0 1rem 1rem;
+  margin-left: auto; 
 }
 
 .chat-bubble.assistant {
@@ -95,18 +95,28 @@
   align-self: flex-start;
   justify-content: flex-start;
   border-radius: 0 1rem 1rem 1rem;
+  margin-left: 0; 
 }
 
 .chat-bubble-content {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .chat-avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin: 0 0.5rem;
+  margin-right: 0.5rem; 
+}
+
+.chat-bubble.user .chat-avatar {
+  margin-right: 0;
+  margin-left: 0.5rem; 
+}
+
+.chat-bubble p {
+  margin: 0;
 }
 
 .chat-input-container {
