@@ -7,7 +7,7 @@ const app = express();
 const port =  process.env.PORT ||3000;
 
 //this code is keep the server active as it gets down after few minutes of inactivity
-setTimeout(() => {
+setInterval(() => {
    console.log("Hail! I am still here!"); 
 }, 300000);
 
