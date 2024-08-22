@@ -1,5 +1,6 @@
 import './HeroPage.css';
 import { motion } from 'framer-motion';
+import botIcon from '../assets/bot.png';
 
 const HeroPage = ({ theme, setShowChatWindow }) => {
   return (
@@ -10,11 +11,14 @@ const HeroPage = ({ theme, setShowChatWindow }) => {
         transition={{ duration: 0.5 }}
         className="hero-content"
       >
-        <h1>Welcome to our Chatbot</h1>
+        <div className="hero-icon-container">
+          <img src={botIcon} alt="ChatBud" className="hero-icon" />
+        </div>
+        <h1>Meet ChatBud: Your AI Buddy</h1>
         <p>
-          Discover the power of our cutting-edge chatbot application, built with React and Express. Engage in seamless conversations, get instant responses, and experience the future of communication.
+          ChatBud is your AI companion, always here to listen and chat about anything on your mind. Whether you want to vent, share your thoughts, or just have a casual conversation, ChatBud is ready to talk with you, offering a unique and comforting experience.
         </p>
-        <button className="hero-button" onClick={() => setShowChatWindow(true)}>Try the Chatbot</button>
+        <button className="hero-button" onClick={() => setShowChatWindow(true)}>Talk to ChatBud</button>
       </motion.div>
     </div>
   );

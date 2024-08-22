@@ -8,21 +8,21 @@ function App() {
   const [theme, setTheme] = useState('light');
   const [showChatWindow, setShowChatWindow] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if(savedTheme){
+    if (savedTheme) {
       setTheme(savedTheme);
-    }else{
+    } else {
       const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setTheme(preferDark ? 'dark' : 'light');
     }
-  },[]);
+  }, []);
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
   };
- 
+
 
   return (
     <div className={`app ${theme}`}>
@@ -40,8 +40,8 @@ function App() {
           </span>
         </label>
       </div>
-      <HeroPage theme={theme} setShowChatWindow={setShowChatWindow}/>
-      <Chatbot theme={theme} showChatWindow={showChatWindow} setShowChatWindow={setShowChatWindow}/>
+      <HeroPage theme={theme} setShowChatWindow={setShowChatWindow} />
+      <Chatbot showChatWindow={showChatWindow} setShowChatWindow={setShowChatWindow} />
     </div>
   );
 }

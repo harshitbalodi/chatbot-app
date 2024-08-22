@@ -34,9 +34,28 @@
   border-radius: 0.75rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 320px;
-  height: 400px;
+  max-height: 400px;
   display: flex;
   flex-direction: column;
+}
+
+.chatbot-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--button-bg-hover);
+}
+
+.chatbot-header-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5rem;
+}
+
+.chatbot-header-title {
+  font-size: 1rem;
+  color: var(--text-color);
 }
 
 .chat-messages {
@@ -77,7 +96,6 @@
 .chat-bubble {
   display: flex;
   margin-bottom: 0.5rem;
-  max-width: 80%;
   max-width: max-content;
   padding: 0.75rem;
 }
@@ -148,4 +166,6 @@
 
 .chat-input-container button:hover {
   background-color: #89a6c0;
-}
+} 
+
+

@@ -7,7 +7,7 @@ import botIcon from '../assets/bot.png';
 import manIcon from '../assets/man.png';
 import womanIcon from '../assets/woman.png';
 
-const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
+const Chatbot = ({showChatWindow, setShowChatWindow }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [userGender, setUserGender] = useState(null);
@@ -93,6 +93,12 @@ const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.3 }}
           >
+            {/* Fixed Header */}
+            <div className="chatbot-header">
+              <img src={botIcon} alt="ChatBud" className="chatbot-header-icon" />
+              <h2 className="chatbot-header-title">ChatBud</h2>
+            </div>
+
             <div className="chat-messages">
               {chatHistory.map((message, index) => (
                 <motion.div
@@ -155,3 +161,4 @@ const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
 };
 
 export default Chatbot;
+

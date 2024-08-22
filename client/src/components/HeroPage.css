@@ -1,7 +1,8 @@
 .hero-section {
   padding: 5rem 2rem;
   text-align: center;
-  height: 90vh;
+  min-height: 90vh;
+  max-height: max-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,14 +10,10 @@
 }
 
 :root {
-  /* --hero-bg-light: linear-gradient(to right, #007bff, #6c63ff); */
   --hero-bg-light: linear-gradient(90deg, #a7c7e7, #f7d1cd);
   --hero-bg-dark: linear-gradient(to right, #1a1a1a, #333333);
   --hero-text-light: #3e3e3e;
   --hero-text-dark: #e0e0e0;
-  /* --hero-button-light: #ffffff; */
-  /* --hero-button-dark: #4a90e2; */
-  /* --hero-button-hover-light: #f0f0f0; */
   --hero-button-hover-dark: #357abd;
 }
 
@@ -36,6 +33,7 @@
   padding: 20px;
   text-align: center;
 }
+
 .hero-section h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -61,11 +59,24 @@
   background-color: var(--button-bg-hover);
 }
 
-/* .hero-section.dark .hero-button {
-  background-color: var(--hero-button-dark);
-  color: var(--hero-bg-dark);
-} */
-
 .hero-section.dark .hero-button:hover {
   background-color: var(--hero-button-hover-dark);
-} 
+}
+
+.hero-icon-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.hero-icon {
+  width: 120px;
+  height: 120px;
+  transition: transform 0.3s;
+}
+
+.hero-icon:hover {
+  transform: scale(1.1);
+}
