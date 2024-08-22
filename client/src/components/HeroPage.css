@@ -1,38 +1,71 @@
-
-.hero {
-    background: linear-gradient(90deg, #A7C7E7, #F7D1CD);
-    color: white;
-    padding: 5rem 2rem;
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.hero-section {
+  padding: 5rem 2rem;
+  text-align: center;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .hero p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  
-  .hero button {
-    background-color: white;
-    color: #A7C7E7;
-    padding: 0.75rem 1.5rem;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .hero button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  
+
+:root {
+  /* --hero-bg-light: linear-gradient(to right, #007bff, #6c63ff); */
+  --hero-bg-light: linear-gradient(90deg, #a7c7e7, #f7d1cd);
+  --hero-bg-dark: linear-gradient(to right, #1a1a1a, #333333);
+  --hero-text-light: #3e3e3e;
+  --hero-text-dark: #e0e0e0;
+  /* --hero-button-light: #ffffff; */
+  /* --hero-button-dark: #4a90e2; */
+  /* --hero-button-hover-light: #f0f0f0; */
+  --hero-button-hover-dark: #357abd;
+}
+
+.hero-section.light {
+  background: var(--hero-bg-light);
+  color: var(--hero-text-light);
+}
+
+.hero-section.dark {
+  background: var(--hero-bg-dark);
+  color: var(--hero-text-dark);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+.hero-section h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.hero-button {
+  background-color: var(--button-bg);
+  color: var(--hero-bg-light);
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.hero-button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* .hero-section.dark .hero-button {
+  background-color: var(--hero-button-dark);
+  color: var(--hero-bg-dark);
+} */
+
+.hero-section.dark .hero-button:hover {
+  background-color: var(--hero-button-hover-dark);
+} 

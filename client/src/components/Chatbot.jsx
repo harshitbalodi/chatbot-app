@@ -5,24 +5,38 @@ import './Chatbot.css';
 import notificationSound from '../assets/notification-sound.mp3';
 import botIcon from '../assets/bot.png';
 import manIcon from '../assets/man.png';
+import womanIcon from '../assets/woman.png';
 
-const Chatbot = () => {
-  const [showChatWindow, setShowChatWindow] = useState(false);
+const Chatbot = ({ theme, showChatWindow, setShowChatWindow }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [userGender, setUserGender] = useState(null);
   const chatWindowRef = useRef(null);
+  const lastMessageRef = useRef(null);
 
   useEffect(() => {
-    if (showChatWindow) {
-      setChatHistory([{ role: 'assistant', message: 'Hello! How can I assist you today?' }]);
+    const gender = localStorage.getItem('userGender');
+    if (gender) {
+      setUserGender(gender);
+    }
+  }, []);
+
+  useEffect(() => {
+    const messagetext = userGender ? 'Hello! How can I assist you today?' : 'Hello! Before we start, please select your gender:';
+    if (showChatWindow && chatHistory.length === 0) {
+      setChatHistory([{ role: 'assistant', message: messagetext }]);
     }
   }, [showChatWindow]);
 
   useEffect(() => {
-    if (showChatWindow && chatWindowRef.current) {
-      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    scrollToBottom();
+  }, [chatHistory]);
+
+  const scrollToBottom = () => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [chatHistory, showChatWindow]);
+  };
 
   const handleInputChange = (e) => {
     setMessage(e.target.value);
@@ -59,6 +73,16 @@ const Chatbot = () => {
     audio.play();
   };
 
+  const handleGenderSelection = (gender) => {
+    setUserGender(gender);
+    localStorage.setItem('userGender', gender);
+    setChatHistory((prev) => [
+      ...prev,
+      { role: 'user', message: `I am a ${gender}.` },
+      { role: 'assistant', message: `Great! How can I assist you today?` }
+    ]);
+  };
+
   return (
     <div>
       <AnimatePresence>
@@ -79,28 +103,41 @@ const Chatbot = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
+                  ref={index === chatHistory.length - 1 ? lastMessageRef : null}
                 >
                   <div className="chat-bubble-content">
-                    <img
-                      src={message.role === 'user' ? manIcon : botIcon}
-                      alt={`${message.role} avatar`}
-                      className="chat-avatar"
-                    />
+                    {message.role === 'assistant' && <img src={botIcon} alt="bot" className="chat-avatar" />}
                     <p>{message.message}</p>
+                    {message.role === 'user' && <img src={userGender === 'man' ? manIcon : womanIcon} alt="user" className="chat-avatar" />}
                   </div>
                 </motion.div>
               ))}
+              {chatHistory.length === 1 && !userGender && (
+                <div className="gender-selection">
+                  <div className="gender-option" onClick={() => handleGenderSelection('man')}>
+                    <img src={manIcon} alt="man" className="gender-icon" />
+                    <p>Man</p>
+                  </div>
+                  <div className="gender-option" onClick={() => handleGenderSelection('woman')}>
+                    <img src={womanIcon} alt="woman" className="gender-icon" />
+                    <p>Woman</p>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="chat-input-container">
-              <input
-                type="text"
-                placeholder="Type your message..."
-                value={message}
-                onChange={handleInputChange}
-                onKeyUp={handleKeyUp}
-              />
-              <button onClick={handleSendMessage}>Send</button>
-            </div>
+
+            {userGender && (
+              <div className="chat-input-container">
+                <input
+                  type="text"
+                  placeholder="Type your message..."
+                  value={message}
+                  onChange={handleInputChange}
+                  onKeyUp={handleKeyUp}
+                />
+                <button onClick={handleSendMessage}>Send</button>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -113,12 +150,10 @@ const Chatbot = () => {
         exit={{ scale: 0 }}
         transition={{ duration: 0.3 }}
       >
-       <img className="chat-avatar" src={botIcon} alt="" />
+        <img src={botIcon} alt="chatbot" />
       </motion.button>
     </div>
   );
 };
 
 export default Chatbot;
-
-
